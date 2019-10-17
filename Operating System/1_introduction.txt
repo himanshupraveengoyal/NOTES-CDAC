@@ -1,0 +1,27 @@
+ Concurrency, parallelism, and non-blocking I/O: an overview
+
+ # For now, concurrency is "handling many tasks during the same time span":
+   ## Any app with a GUI (e.g., a game) needs to manage the GUI and perform the underlying logic.
+   ## A typical network app queues up requests, which then need to be handled concurrently.
+
+ # For now, (true) parallelism is "processing many tasks literally at the same time."
+   ## The tasks in a concurrent app would be farmed out to separate processors for true parallelism.
+   ## True parallelism requires multiple processors.
+      ### Multiprocessor machines now are available at consumer prices.
+
+ # Two 'classic' mechanisms for concurrency: multiprocessing and multithreading.
+   ## Each mechanism supports true parallelism on a multiprocessor machine.
+
+ # Non-blocking I/O enables quick jumps from one I/O task to another, thereby supporting
+   concurrency without parallelism.
+   ## Non-blocking I/O typically is used in conjunction with  a 'classic' approach:
+      ### The nginx web server: multiprocessing + non-blocking I/O
+      ### Node.js: non-blocking I/O at the API level, multithreading under the hood.
+
+ # Summary
+   ## Concurrency is a requirement for many modern apps, and there are various ways to enable it.
+   ## Parallelism boosts performance by increasing throughput: more work done in a given amount of time.
+      ### Concurrent tasks can be executed in parallel on a multiprocessor machine.
+   ## Non-blocking I/O is used mostly in combination with multiprocessing or multithreading
+
+                

@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Chotu {
+
+	public static void main(String[] args) 
+	{
+	    int count=0,min=100;
+	    Scanner sc=new Scanner(System.in);
+	    System.out.println("Enter the Number:");
+	    String str=sc.nextLine();
+	    int len=str.length();
+	    str=str+"0";
+	    char[] strdata = str.toCharArray();
+	    char search='1';
+	    for(int i=0;i<len;i++)
+	    {
+    	    if(search==strdata[i])
+    	    {
+    	        count++;
+    	        if(min>count && count!=0 && count!=1)
+    	            if(strdata[i+1]=='0') min=count;
+    	    }
+    	    else
+    	    {
+    	        count=0;
+    	    }
+	    }
+	    if(min!=100)
+	    System.out.println(min);
+	    else
+	    System.out.println(-1);
+	}
+}

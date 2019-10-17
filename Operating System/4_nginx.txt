@@ -1,0 +1,48 @@
+ Multiprocessing in production-grade software: the nginx web server
+#### here multiprocessing means, using several processes, for 
+     multitasking 
+ # www.nginx.com
+   ## The web server is written in C.
+   ## nginx combines multiprocessing and 
+      non-blocking I/O as concurrency mechanisms.
+
+ # nginx, like any modern web server that relies on 
+   multiprocessing for concurrency,
+   is a "pre-forking" server.
+   ## nginx can be started as a 'system service' (at boot time), 
+      and is platform-neutral.
+
+ # nginx.conf                ##  configuration entries are key/value pairs: no XML!
+
+    user www-data;           ## www-data (name is arbitrary) is owner of workers
+    worker_processes 4;      ## default number of workers, might be set to processor count
+    pid /var/run/nginx.pid;  ## file /var/run/nginx.pid stores pid of master process
+
+    events {
+       worker_connections 1024;  ## Max of 1024 connections per worker 
+       ...                       ## (typical browsers open at least two connections to a site per client session)
+    }   
+
+ # ps -ef | grep nginx
+
+#### in this application, "there are several processes" created, for 
+#### "handling multitasking" - it is a form of "unconventional 
+#### multithreading" 
+#### are you able to visualize, that there are several 
+### exxecution units/threads, in this application, but
+#### these execution units are unconventional threads, not 
+#### conventional, lwp entities 
+#### "in this unconventional multithreading, multitasking 
+#### is done , using processes", "not lwp threads" 
+####
+ 
+    Owner     pid   ppid   nginx process type
+
+    root      1803     1   master process /usr/sbin/nginx  ## command that started nginx
+    www-data  1804  1803   worker process
+    www-data  1805  1803   worker process
+    www-data  1807  1803   worker process
+    www-data  1808  1803   worker process
+
+
+

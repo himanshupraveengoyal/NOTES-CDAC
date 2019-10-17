@@ -1,0 +1,35 @@
+ Multithreading overview
+
+ # The chief advantage of multithreading over multiprocessing is that threads are 'lighter' than processes:
+   
+   ## A process consists of one or more threads of execution.
+   ## A thread-level context switch has a near-zero cost for threads in the same process.
+   ## A process-level context switch is significantly more expensive, in the millisecond range.
+
+ # The chief disadvantage is that threads in the same process share the same address space:
+ 
+   ## The programmer, rather than the OS, must ensure that two threads in the same process don't
+      inappropriately access the same memory location (e.g., by trying to update the location).
+
+   ## The programmer must coordinate threads in the same process to avoid 'race conditions'.
+      ### If the coordination is overdone, 'deadlock' may result.
+
+   ## Thread coordination must be just right:
+   
+      ### Too little brings the threat of race conditions and, therefore, unpredictable results.
+      ### Too much hurts efficiency and may result in deadlock.
+
+ # Some systems (e.g., Linux) implement threads as processes that happen to share an address space; other
+   systems (e.g., Windows) have distinct kernel-level support for threads.
+
+   ## Under any implementation, the standard behavior is that distinct processes have distinct address spaces,
+      whereas threads in the same process share an address space.
+
+ # Examples in C, Java, and Go
+
+   ## C# and Java have very similar support for threading, although both sides might disagree with
+      this characterization. :)
+      
+	  
+	  
+ 

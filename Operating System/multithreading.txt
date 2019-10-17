@@ -1,0 +1,27 @@
+ A first look at multithreading: the Tomcat web server, written in Java
+
+ # Tomcat implements the 'one-thread-per-request' model for handling client requests.
+ 
+ # Tomcat runs as a single process, which is multithreaded.
+
+ # Web sites and services are deployed as JAR files (with a .war extension) dropped
+   into a particular directory (TOMCAT_HOME/webapps) or subdirectory thereof.
+   
+   ## The WAR file's name (e.g., 'site1' in 'site1.war') becomes the first part of 'resource path'
+      in a request URL:
+
+      http://somemachine.org:8080/site1/...    ## site1 for the site1.war file
+      http://somemachine.org:8080/site1/hi.jsp ## a completed URL, with hi.jsp as the requested resourc
+
+   ## Tomcat delegates each request for any WAR file to a thread, the 'one-thread-per-request' model
+   
+      ### Code within the WAR file is thus susceptible to race conditions because multiple request-handling
+	  threads have access to the very same memory locations: the burden is on the programmer to
+          ensure proper thread coordination.
+
+ # For efficiency, Tomcat creates a thread pool at start-up: indeed, two thread pools--one for
+   requests over HTTP, another for requests over HTTPS if HTTPS is enabled.
+
+ # Other Java-centric web servers, such as Jetty, implement the one-thread-per-request model as well.
+
+ 

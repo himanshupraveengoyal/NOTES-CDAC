@@ -1,0 +1,40 @@
+ Processes and threads 
+
+ # A process is a 'program in execution', each with its own address space.
+   ## Executing a program from the command-line is an example:
+   
+      % hi.exe  ## % is the command-line prompt, hi.exe is an executable program.
+	  
+   ## The address space comprises the memory locations accessible to the process.
+   ## Separate address spaces effectively partition memory among the processes.
+ 
+ # A thread is a sequence of executable instructions within a process.
+ 
+   # A 1-instruction thread is trivial, and threads made up of tens of
+     instructions are more typical.
+   # A single-threaded process has one thread, whereas a multithreaded process has multiple ones.
+   # Although there are different ways to implement threads (more on this later), the
+     critical point is this:
+
+     ### Threads within a process share the same address space--they have access to exactly
+	 the same memory locations. This is the root cause of race conditions.
+     ### A 'race condition' arises when two or more threads concurrently access the same memory
+	 location and at least one of the threads tries to update the location. For instance, each thread
+         might be executing the instruction:
+
+         n = random_num()  ## n is a shared memory location among the threads, random_num() returns a random number
+
+         The result is unpredictable, except that the last thread to execute this 'wins'.
+     
+ # Scheduling on modern systems: to schedule a process on a processor is to schedule one of its threads.
+
+  Process1    scheduled   +----------+
+    Thread11------------->|processor3|
+    Thread12              +----------+
+
+  Process2
+    Thread21
+    Thread22  scheduled   +----------+
+    Thread23------------->|processor7|
+                          +----------+
+

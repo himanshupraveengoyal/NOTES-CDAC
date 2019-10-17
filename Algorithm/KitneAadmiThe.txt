@@ -1,0 +1,24 @@
+import java.io.*; 
+
+public class KitneAadmi 
+{ 
+	public static void main(String[] args) throws IOException 
+	{ 
+		File file = new File("C:\\Users\\Himanshu\\Desktop\\Story.txt"); 
+		FileInputStream fileStream = new FileInputStream(file); 
+		InputStreamReader input = new InputStreamReader(fileStream); 
+		BufferedReader reader = new BufferedReader(input); 
+		String line;  
+		int countWord = 0; 
+		while((line = reader.readLine()) != null) 
+		{ 
+			if(!(line.equals(""))) 
+			{ 
+				String[] wordList = line.split("\\s+"); 
+				countWord += wordList.length; 
+			} 
+		} 
+		
+		System.out.println("Total word count = " + countWord); 
+	} 
+}

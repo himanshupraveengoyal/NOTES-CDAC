@@ -1,0 +1,59 @@
+ Three approaches to concurrency: 
+
+ multiprocessing(multiple processes, in an active application ), 
+ multithreading(multiple lightweight processes, in an active application), 
+ non-blocking I/O(used for network IO operations)
+
+####  multiprocessing - system / applications create and use several 
+####  processes, for multitasking 
+
+#### tasks are processes, in this context - however, it will vary, as 
+#### per context
+ 
+     client requests  +------------+   ## Task1(process1): handle request1
+   ------------------>| web server |   ## Task2(process2): handle request2
+                      +------------+      ...
+
+  # Multiprocessing: dispatch each task to a 
+    separate process ('program in execution')
+  
+    ## For efficiency, "prefork" the 
+       processes by building a pool of these at start-up.
+       Then grab a process from the pool to act as the 'task handler'.
+
+    ## When the task-handling process finishes its work, put it to sleep.
+
+    ## Apache2, nginx, and IIS are production-grade examples.
+ --->these services/application instances use multiple processes, 
+     for a single active instance of the application - this 
+     provides multitasking to the application - scheduling 
+     depends on the settings - may be default scheduling 
+     policy or other possible settings 
+#### if these services are to be loaded/launched on a 
+##### given server/platform, 
+###  how are they done ?? what is the multitasking model ?? 
+##### typically, the model used is multiple processes - 
+####  in other scenarios, threading or 
+####  hybrid models may be used ??
+ 
+
+ # Multithreading: dispatch each task to a 
+                  separate thread within a process.
+  
+    ## Again for efficiency, build a thread-pool at start-up, 
+       and grab a thread from
+       the pool to act as the 'task handler'.
+
+    ## When the task-handling thread finishes its work, put it to sleep.
+
+    ## Tomcat and Jetty are production-grade examples.
+---->this is a lightweight flavour of nginx or Apache
+  # Non-blocking I/O: in its pure form, a single-threaded process that jumps quickly
+    from one task to another, perhaps doing only partial processing of each task.
+	
+    ## For example, the non-blocking web server might read (and cache) some bytes
+       as part of Task1, then do the same for Task2, and so on until all of the request
+       bytes for a given task have been read.
+
+    ## Node.js is the obvious 'pure' example (but even Node.js takes a hybrid approach).
+ 

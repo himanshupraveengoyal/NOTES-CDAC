@@ -1,0 +1,63 @@
+ Using a local socket (Unix domain socket) for IPC
+
+               +-------+     +--------------+     +-----------------+     +-----------+
+    request--->| nginx |<--->| local socket |<--->| Unicorn workers |<--->| Rails app |
+               +-------+     +--------------+     +-----------------+     +-----------+
+
+ # Architectural pieces:
+
+   ## Unicorn is an 'application server' that loads the Rails framework. (Unicorn can double as
+      a lightweight web server.) Unicorn and the Rails app talk via 'Rack' middleware.
+   ## Unicorn workers handle requests against the Rails app.
+   ## The nginx web server, in this context, acts as a 'reverse server proxy' that forwards
+      incoming HTTP requests to the application server (in effect, one of the Unicorn workers),
+      which in turn dispatches the request to the appropriate code in the Rails app.
+	  
+ # Role of local socket:
+
+   ## The Unix-domain socket provides IPC between the nginx web server and the Unicorn application server.
+   ## Requests go from nginx through the socket to a Unicorn worker, and from there to the Rails app.
+   ## Requests go from the Rails app through the Unicorn worker through the local socket to nginxt, and
+      from there to the client.
+   
+ # Unix domain sockets versus named pipes:
+
+   ## The basic roles are very much alike, although the UDS has a richer API.
+
+ # Configuration files
+
+   ## Unicorn side:
+   
+      listen '/var/run/unicorn/unicorn.sock', :backlog => 1024   ## listen on the USD
+
+   ## nginx side:
+
+      worker_processes  4;
+      events {
+          worker_connections  1024;
+      }
+
+      http {
+          include       mime.types;
+          default_type  application/octet-stream;
+          sendfile           on;
+          keepalive_timeout  65;
+
+          upstream app_server {
+              ## Unix domain socket for interaction with Unicorn
+              server unix:/var/run/unicorn/unicorn.sock;
+          }
+          server {
+              listen       80;
+              server_name  localhost;
+
+              location / {
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header Host $http_host;
+                 proxy_redirect off;
+                 proxy_pass http://app_server;  ## Forward requests to app server
+              }
+          }
+      }
+
+ 

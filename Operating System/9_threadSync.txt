@@ -1,0 +1,43 @@
+ Mechanisms for thread coordination
+
+ # The terms below are associated with processes and threads, but the focus now is on threads
+   given the assumption that a process executes in that one of its threads executes.
+
+ # A 'critical section' of code must be executed in single-threaded fashion because
+   otherwise a race condition could arise.
+ 
+   ## For example, if threads T1 and T2 can both execute 
+
+        N = N + 1  ## the same storage N is accessible to T1 and T2
+
+      this statement is a critical section of code. T1 and T2 should not execute this section at the same time.
+
+ # A locking mechanism should provide the following services:
+
+   ## The mechanism should ensure 'mutual exclusion': if T1 manages to grab the lock,
+      then T2 is excluded from the critical section that the lock protects while T1
+      holds the lock; and vice versa.
+
+   ## The mechanism should ensure 'progress': if no thread holds the lock, then some
+      thread should be able to grab it and thereby enter the critical section that the
+      lock protects.
+
+ # Various locking mechanisms:
+
+   ## A 'semaphore' restricts the number of threads allowed to access a shared resource (e.g.,
+      a shared function). For example, 'semahore' might allow two threads to access a chunk of
+      code simultaneously, but no more than two. A semaphore is thus a set of permission tickets,
+      which enable a thread to access a resource.
+	  
+      ### Semaphores as 'tickets': a semaphore is like a ticket that grants access to a resource.
+	  A semaphore with a value of three would grant access to three threads at most at a time.
+
+   ## A 'mutex' is a semaphore with a value of 1: whichever thread holds the mutex has access to the
+      protected resource, whereas all others are excluded.
+	  
+      ### A mutex enforces mutual exclusion, but a semaphore with a value > 1 would not.
+
+   ## A 'monitor' (which the Java 'synchronized' block provides) is a mechanism that enforces
+      mutual exclusion, supports progress, and has addition mechanisms for thread cooperation: in
+      Java's case, the 'wait' mechanism supports quiet waiting for a lock to be released, and the 'notify'
+      mechanism notifies waiters that a lock has been released.

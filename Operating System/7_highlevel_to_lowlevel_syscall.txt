@@ -1,0 +1,42 @@
+ System call overview for concurrency, parallelism, and non-blocking I/O
+
+ # The systems context: user-space and kernel-space code
+   ## User-space code does not control shared physical resources 
+      (processors, memory, I/O devices).
+   ### Ordinary applications execute in user space.
+   
+   ## Kernel-space code comprises the core OS routines 
+      that control shared physical resources.
+
+   ## A "system call" originates in user-space, but results 
+      in the execution of a kernel-space routine.
+      ### Standard library functions (user-space) mediate 
+          between ordinary application code and
+	  the core OS routines (kernel-space) that 
+          some library functions call.
+		  
+      ### The standard library goes by various names: on Unix-type systems, libc 
+          or variants thereof
+          (e.g., glibc on Ubuntu); on Windows, the Windows API or variants thereof (e.g., Win32 API)
+
+   ## Depiction: Node.js app calls the cluster.fork() function
+
+                                                               system call
+                                                    user space<----+---->kernel space
+                                                                   |
+               calls                 calls                         | calls
+   Node.js app------->cluster.fork()------->
+                                           |---->libfunction fork()|------->kernel routine 
+                                                                   |     ## in traditional Unix, named fork
+                                                                   |     ## in modern Linux, named clone
+
+ # How many library functions make system calls?
+   ## Not every library function makes a system call, e.g., strlen("foobar") does not.
+   ## Of the 2,000 or so library functions, about 400 result in system calls.
+
+ # Back to an earlier question: Why C?
+  
+    The standard libraries and kernel routines are written mostly in C, with some assembly language or
+    non-standard C extensions covering the rest.
+
+

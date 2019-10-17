@@ -1,0 +1,49 @@
+ Hybrid approaches
+
+ # There's no hard-and-fast rule about how best to support concurrency.
+   ## Multiprocessing, multithreading, and non-blocking I/O can be used in various combinations.
+
+ # Sample hybrids
+   ## "Multiprocessing" + "multithreading": IIS (Windows web server) and AspNet runtime
+
+   	      client side                         server side
+   	    +-------------+  HTTP requests    +-----------------+
+    	    | web browser |------------------>| Web server (IIS)|
+   	    |             |<------------------|                 |
+   	    +-------------+  HTTP responses   +-------+---------+
+   	                                              |
+   	                                        aspnet_isapi.dll            ## Links IIS process with workers
+   	                                              |
+   	                                              +--- aspnet_wp.exe    ## worker process 1
+   	                                              |
+   	                                              +--- aspnet_wp.exe    ## worker process 2
+   	                                              ...                   ...
+
+        ### Each worker process is multithreaded 
+     -----> (by default, 10 threads per worker process), and 
+     --------> each thread handles a single request 
+            (the 'one-thread-per-request' model)
+
+   ## "Multiprocessing" + "non-blocking I/O": nginx
+      ### Multiprocessing:
+	  #### nginx has a 'master process' to read configuration files and to watch over worker processes
+               (e.g., start a new worker if one happens to die unexpectedly).
+          #### A 'worker process' handles a client request: a given worker may handle even
+	       thousands of requests concurrently--given the efficiency of non-blocking I/O.
+          #### Other (optional) processes (e.g., a cache loader and a cache manager) also are in play.
+
+      ### Non-blocking I/O:
+	  #### The workers employ non-blocking I/O in handling requests, each of which is partitioned
+ 	       into a collection of sub-requests. A completed sub-request generates an event, which is
+	       handled in the course of assembling a full response out of pieces.
+
+   ## Non-blocking I/O + multithreading (under the hood): Node.js
+
+                         Node.js server  ## a single-threaded process managing an event loop
+          client request  +--------+
+	 ---------------->|        |     ## 'workers' are JavaScript functions that read and
+	       ...        | event           otherwise handle a client's request using non-blocking I/O
+	  client request  | loop   |        and callbacks to signal task completion
+         ---------------->|        |
+			  +--------+     ## Long-running tasks (e.g., accessing a DB) are delegated to
+					    under-the-hood threads, with callbacks to signal task completion

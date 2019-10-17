@@ -1,0 +1,40 @@
+ Wrapup of the overview
+
+ # Concurrency and parallelism are different.
+ 
+   ## Concurrency involves handling multiple tasks in the same time span.
+   
+   ## Parallelism involves processing multiple tasks literally at the same time.
+      ### True parallelism requires multiple processors.
+   
+   ## Parallelism is a performance-boosting way to manage concurrency.
+
+ # The classic approaches to concurrency are multiprocessing and multithreading.
+ 
+   ## Non-blocking I/O has emerged as an option as well, but one that's typically
+      used in conjunction with multiprocessing or multithreading.
+
+   ## Non-blocking I/O sometimes is described as 'concurrency without parallelism'.
+
+ # Different languages have different advantages when 
+   it comes to studying/using
+   concurrency, parallelism, and non-blocking I/O.
+
+   ## C is close to the metal/embedded: the system libraries and 
+      core OS routines at work under the hood.
+   
+   ## Whatever the application language, multiprocessing, 
+      multithreading, and non-blocking I/O calls in the language 
+      hit the C libraries and, from there, kernel-space routines.
+
+   ## Java (C#), Go, Node.js and other languages have particular 
+      styles and strength with respect to concurrency in particular.
+	  
+
+
+
+
+
+
+
+

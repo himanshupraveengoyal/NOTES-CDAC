@@ -1,0 +1,43 @@
+ Wrapup of multithreading basics and miscellany
+
+-- Wrapup
+
+ # Multithreading can be a highly efficient way to do concurrent programming,
+   as thread-level context switches are very cheap.
+   ## It's the preferred approach to concurrency in 
+      languages such as Java and C#.
+       -->every language suppports different forms 
+          of multitasking/concurrency and mainly, 
+          threads/multithreading 
+       -->some of these support multiple processes 
+          as well as multiple threads 
+ # Multithreading has twin challenges for the programmer:
+   ## Avoid race conditions by ensuring that multiple threads don't access shared
+      memory locations in inappropriate ways.
+      ### Ensure that critical sections are executed in single-threaded mode.
+      
+   ## Avoid 'over synchronization' that degrades performance and may result in deadlock.
+
+ # Languages now offer programmers high-level constructs and types to ease the challenges
+   of multithreaded programming.
+   ## But sometimes a simple mutex is still the way to go.
+ 
+-- Native versus green threads, and the Global Interpreter Lock (GIL)
+
+ # A 'native thread' of a language is under 
+   kernel OS control when it comes to scheduling.
+   ## Since roughly 2000, Java Thread instances map to 
+      'native' threads. (Same for C#.)
+   
+   ## C's 'pthreads' (the 'p' for POSIX API standardization) are 'native' threads.
+
+ # A 'green thread' (aka 'microthread', 'tasklet') is under a particular language's runtime control.
+   ## In effect, 'green threads' emulate native threads, and may provide better
+      performance for operations such as thread creation and synchronization.
+	  
+   ## Prior to version 1.9, for example, Ruby's standard implementation (CRuby) had only green threads.
+
+ # A GIL is a mechanism (in implementation, a mutex) that a runtime uses to allow only one
+   thread to execute at a time, even in a multithreaded environment: no thread-level parallelism.
+   ## The standard implementations of Ruby (CRuby) and Python (CPython) have a GIL.
+

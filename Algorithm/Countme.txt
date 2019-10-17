@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Countme {
+
+	public static void main(String[] args) 
+	{
+	    int count;
+	    Scanner sc=new Scanner(System.in);
+	    System.out.println("Enter the Number:");
+	    String str=sc.nextLine();
+	    int len=str.length();
+	    char[] strdata = str.toCharArray();
+	    for(int i=0;i<10;i++)
+	    {
+	        count=0;
+	        String str1 = Integer.toString(i);
+	        char[] ab = str1.toCharArray();
+	        char searchno=ab[0];
+	        for(int j=0;j<len;j++)
+	        {
+	            if(strdata[j]==searchno)
+	            {
+	                count++;
+	            }
+	        }
+	        if(count>0)
+	        System.out.println(i+" "+count);
+	    }
+ 	}
+
+}

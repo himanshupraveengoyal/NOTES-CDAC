@@ -1,0 +1,33 @@
+ Three approaches to concurrency: multiprocessing, multithreading, non-blocking I/O
+
+     client requests  +------------+   ## Task1: handle request1
+   ------------------>| web server |   ## Task2: handle request2
+                      +------------+      ...
+
+  # Multiprocessing: dispatch each task to a separate process ('program in execution')
+  
+    ## For efficiency, "prefork" the processes by building a pool of these at start-up.
+       Then grab a process from the pool to act as the 'task handler'.
+
+    ## When the task-handling process finishes its work, put it to sleep.
+
+    ## Apache2, nginx, and IIS are production-grade examples.
+
+  # Multithreading: dispatch each task to a separate thread within a process.
+  
+    ## Again for efficiency, build a thread-pool at start-up, and grab a thread from
+       the pool to act as the 'task handler'.
+
+    ## When the task-handling thread finishes its work, put it to sleep.
+
+    ## Tomcat and Jetty are production-grade examples.
+
+  # Non-blocking I/O: in its pure form, a single-threaded process that jumps quickly
+    from one task to another, perhaps doing only partial processing of each task.
+	
+    ## For example, the non-blocking web server might read (and cache) some bytes
+       as part of Task1, then do the same for Task2, and so on until all of the request
+       bytes for a given task have been read.
+
+    ## Node.js is the obvious 'pure' example (but even Node.js takes a hybrid approach).
+ 

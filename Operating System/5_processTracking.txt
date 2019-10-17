@@ -1,0 +1,63 @@
+ Process tracking and context switching
+
+ # Each process has a unique ID (pid), a non-negative integer.
+ 
+   ## A process's pid is recorded in the system's process table.
+   
+   ## Library functions getpid() and getppid() get the pid and the parent's pid, respectively.
+   
+   ## The pid of 0 is typically reserved for the 'idle process', the one that 'runs' when there's nothing else to run.
+   
+   ## The 'init process' has a pid of 1: the first user-space process that the OS kernel spawns in the boot-up.
+   
+      ### On shutdown, the init process is the last process to terminate: it waits for all of its children.
+      
+      ### The init process starts other processes: system services such as the login service, etc.
+
+ # Key data structures in a process 'context':
+ 
+   ## process table: tracks information per process, in particular information that allows
+      a pre-empted process to restart later.
+      
+   ## page table(s): translate virtual into physical addresses. Each process has its own,
+      which effectively partitions virtual address spaces among processes.
+      
+   ## file table: tracks, per process, files that a process has opened.
+
+ # Every process has a user and group 'owner', which determines the process's access rights
+   to resources.
+
+ # Every process likewise belongs to a 'process group', which facilitates sending signals
+   to every process in a group, to getting information about related processes, and so on.
+   
+   ## In the default case, a child process belongs to the same as its parent.
+
+ # Most modern systems use pre-emptive scheduling, with either fixed-length or variable-length time-slices:
+   a process that exceeds the time-slice on a given run is pre-empted and sent back to a scheduling queue.
+   
+   ## A process and a thread 'context' consists of key information about it.
+   
+      ### For a process, key data structures such as the process table, the file table, and
+	  its page tables define the 'context'.
+    
+ # Context switches, which occur during pre-emption, come in two flavors:
+ 
+   ## From one thread to another within the same process: 'intraprocess switching'
+   
+   ## From one process to another: 'interprocess switching'
+   
+      ### The big cost is the swapping out of one (virtual) address space for another: page tables
+      
+   ## A process-level context switch is signficantly more expensive than a thread-level context switch.
+   
+      ### The cost of thread-level switching is near zero on modern systems.
+
+      ### Depiction:
+
+          Process1      Process2        processor7
+	    Thread11      Thread21
+	    Thread12
+
+          1st scenario: Thread12 replaces Thread11 on processor7   ## virtually no overhead
+
+          2nd scenario: Thread21 replaces Thread11 on processor7   ## high overhead--process context switch

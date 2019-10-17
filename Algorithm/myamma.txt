@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class Myappaamma {
+
+	public static void main(String[] args) 
+	{
+	    int op=0;
+	    int count;
+	    char fn,sn='z';
+	    Scanner sc=new Scanner(System.in);
+	    int n=sc.nextInt();
+	    sc.nextLine();
+	    String[] str=new String[n];
+	    int len[]=new int[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        str[i]=sc.nextLine();
+	        len[i]=str[i].length();
+	    }
+/*	    for(int i=0;i<n;i++)
+	    {
+	        System.out.println(str[i]+len[i]);
+	    }*/
+	    for(int i=0;i<n;i++)
+	    {
+	        count=0;
+	        for(int j=1+i;j<n;j++)
+	        {
+                if(len[i]==len[j])
+                {
+	                char[] strdata = str[i].toCharArray();
+	                char[] strdata1 = str[j].toCharArray();
+	                for(int k=0;k<len[i];k++)
+	                {
+	                    fn=strdata[k];
+	                    for(int l=0;l<len[i];l++)
+	                    {
+	                        if(fn==strdata1[l])
+	                        {
+	                            ++count;
+	                        }
+	                        if(count==len[i])
+	                        {
+	                            System.out.println(str[i]);
+	                            System.out.println(str[j]);
+	                        }
+	                    }
+	                }
+	                //end of k&l
+                }
+	        }
+	    }
+	    
+ 	}
+
+}

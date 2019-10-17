@@ -1,0 +1,67 @@
+ Multithreading overview
+
+ # The chief advantage of multithreading over multiprocessing(multiple processes) 
+   is that threads are 'lighter' than processes:
+
+
+### following are typical multithreading models used, in the real-world applications 
+ 
+   ## A process consists of one or more threads of execution.
+### typically, an application is managed by a single process, but the process 
+    creates multiple threads, for managing jobs of the application - number of 
+    threads, in a process is , as per the requirements of the application 
+
+### ideally, threads are used, in applications to implement light weight multitasking
+    in an application 
+
+
+   ## A thread-level context switch has a near-zero cost for threads in the same process.
+### thread-level context switches(switching between threads, due to scheduling) 
+    is less expensive - more efficient - less overhead 
+
+   ## A process-level context switch is significantly more expensive, in the millisecond range.
+
+### in the case of process level context switching(switching between processes, due to 
+    scheduling) is more expensive - less efficient - more overheads 
+
+
+ # The chief disadvantage is that threads in the same 
+   process share the same address space:
+#### threads of a process share most of the resources of the process, including 
+     address-space and physical memory - other resources like files / IO are 
+     also shared 
+ 
+   ## The programmer, rather than the OS, must ensure that two threads in the same process don't
+      inappropriately access the same memory location (e.g., by trying to update the location).
+
+   ## The programmer must coordinate threads in the same process to avoid 'race conditions'.
+      ### If the coordination is overdone, 'deadlock' may result.
+
+#### so, in the case of threads, there are more possibilities, for interference 
+     between threads of a process/application, which may lead to corruption of 
+     data / lead to crashing of the application 
+
+   ## Thread coordination must be just right:
+   
+      ### Too little brings the threat of race conditions and, therefore, unpredictable results.
+      ### Too much hurts efficiency and may result in deadlock.
+
+ # Some systems (e.g., Linux) implement threads as processes that happen to share an address space; other
+   systems (e.g., Windows) have distinct kernel-level support for threads.
+
+##### operating systems provide thread services to high-level platforms/programming 
+      languages, which can be used , by applications efficiently 
+
+
+   ## Under any implementation, the standard behavior 
+      is that distinct processes have distinct address spaces,
+      whereas threads in the same process share an address space.
+
+ # Examples in C, Java, and Go
+
+   ## C# and Java have very similar support for threading, although both sides might disagree with
+      this characterization. :)
+      
+	  
+	  
+ 
