@@ -1,0 +1,67 @@
+OOP with C++:
+Software: Visual Studio 2015 or later. Any C++ IDE is OK with it. Dev C++, Atom and Eclipse is also OK. 
+What is a Programming language?
+A Computer program also called as Application is a set of instructions or commands that are issued to the computer to perform certain task. This process of creating the program is called as Programming. The people who create these programs are called as Programmers or simply developers.
+Computer has changed in the course of time, but its interaction with the Humans are always limited to very few commands that it understands. These commands are generated using the programming language. 
+Programmers will create the programs by developing source code(Code) which will span across multiple text based files with specific extensions. Many a time, these group of files will be grouped into a Project.
+
+A collection of peripherals(Computer parts) that combine to make a computer runnable is called as HARDWARE. When the Computer program is loaded into the memory of the hardware it will eventually carry out the instructions in a phased manner which is called as the execution of the program. Once the Program completes its instructions, anything related to it in the hardware will be automatically destroyed.  
+Different types of languages:    
+Machine Language: The heart of the computer is called as the CPU(Central Processing Unit).  The CPU is designed to understand set of instructions in the form of 0s and 1s which is called as machine language. Eg: 10100010001 011101111011.
+They are binary in nature. hard to understand for any human. Early programmers used to write the instructions in machine language directly. 2 problems: Time consuming and very hard to develop. 
+
+Assembly Language: As the Machine language was hard to work with, assembly language was invented. In this, each instruction is provided with an abbreviation which was more like English words instead of binary numbers. However we still used some hexa decimal numbers for performing larger instructions.
+eg: mov al 096h. 
+Assembly language was translated into the machine language using a component called Assembler. These programs were designed to be fast and is used even today in certain time critical Applications.
+Limitations of Assembly Language: Lot of instructions are required to do even simple tasks. Maintenance of the Application had to be done with lots of effort.   
+
+Instead of writing Assembly language which works in conjunction with the machine at low level, a new middle level programing languages were invented. These were then called as High level languages.  Programs written in high level language was to be translated into a format the Computer can understand before they can run.  This was done thro' a process called Compilation. Some smaller languages used interpretations to convert to the instructions.
+
+High Level Code ---> Compiler ---> Executable
+Executable ---> Hardware ---> Results. 
+Compilers are programs that can read the source code and produce a single file called as EXE. This EXE contains the code that is understandable to the computer which executes it.   
+The designer of the programming language will also create the compiler for that language.  
+The job of the compiler is to grammatically check the instructions and ensure that it understands it and then creates the exe for that source code. This grammatical way of writing the code is called as SYNTAX. Only syntactically correct code can be compiled to form an exe. 
+Any programming language will have certain grammar which is used by the programmer to develop the code. 
+Some of the popular high level languages are C, C++, Java and C#. 
+Smaller languages which are used for web based apps are called as Scripting languages and they dont have compilers, instead use interpretors. Interpretors dont generate an EXE, rather it directly converts the source code to execute on the hardware and produce the results: Eg: Perl, Php, JS are some of the Scripting languages
+High Level Code-->Interpretor-->Hardware--->Results.
+
+Our programming languages: C, C++, Java and C#. 
+Advantages of Compilers: One code can execute on multiple machines.
+Compilers will be different for different types of machine architecture. High level code remains same. 
+x86 compiler will be different from PowerPC Compiler and that will be different from a x64 or Windows Compiler.
+High level language remains the same. The syntax also remain the same. 
+
+C++ Language. 
+Developed by Bjarne Stroustrup from Bell Labs in late 70s. The language has all the features of C in it with Classes, an OOP feature. Hence C++ is called as SuperSet of C. Initially C++ was not standardized even though it was maintained by ANSI, later it was ratified as per the ISO standards and has since released with multiple versions since 1998. The Latest is C++ 17 released in 2017. Older versions are C++ 11(2011), C++ 14(2014) and C++03.
+Our course is focused on C++ 11.
+
+Prominent compilers:
+GCC Compiler for UNIX and open source machines.
+Microsoft C++ compiler for Windows Platform. MS C++ Compiler is a a part of a larger Visual C++ which provides Win32 API and MFC for Windows Application development. 
+Visual Studio is the IDE for developing C++ Applications on Windows. However U could use free Compilers and IDEs like Eclipse, Dev C++ for development. But Visual Studio is the most popular and professional IDE for developing C++ Apps.        
+
+What kind of Apps can be developed in C++: Apps that need high performance and presise control over the memory and resources it consumes. This include:
+Desktop Apps, Video Games, Real Time Apps(Transport, Medical), Financial Apps, ERP(Office Apps), Audio and Video Processing Apps. 
+Document readers like Acrobat are created using C++.    
+
+Visual Studio is the IDE used for developing C++.  Its community Edition is free and can be used after downloading it from the MS Website
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
