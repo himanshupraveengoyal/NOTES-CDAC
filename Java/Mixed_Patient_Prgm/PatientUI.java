@@ -13,7 +13,7 @@ public class PatientUI
 		boolean flag=true;
 		do
 		{
-			int choice=MyConsole.GetInt(Menu());
+			int choice=MyConsole.GetInt(ReadFile.ReadDocument());
 			if(choice<=5)
 			{
 				ProcessMenu(choice);
@@ -47,7 +47,7 @@ public class PatientUI
 		}
 	}
 
-	private static String Menu() 
+	/*private static String Menu() 
 	{
 		String menu="PRESS 1-------------------->ADD PATIENT \n";
 		menu+="PRESS 2-------------------->UPDATE PATIENT \n";
@@ -56,7 +56,7 @@ public class PatientUI
 		menu+="PRESS 5-------------------->DISPLAY ALL PATIENT \n";
 		menu+="ENTER YOUR CHOICE ANY OTHER WILL BE CONSIDERED AS EXIT";
 		return menu;
-	}
+	}*/
 	private static void GetAllPatient() 
 	{
 		ArrayList<Patient> patdetails=collections.GetAllPatients();
