@@ -1,0 +1,57 @@
+Jenkins:
+Continuous Integration:
+In DevOps, we integrate various stages of development like coding, testing, integration and finally execute into a single unit. 
+As a part of the coding structure, we implement small changes in code and version control methods very frequently. Developers would push the code into a shared repository multiple no of times.  U should be able to update all the changes made by the developer team on all conditions and watch for any changes made by the team. For any change made, the system should be able pull the new changes, build the system, test it and finally deploy it to the client environment. This is called as Continuous integration.
+Continuous integration is implemented in DevOps using a tool called Jenkins.
+Advantages of continuous integration:
+Integration done once, need not be repeated all the time. 
+Ease to testers.
+Decrease the deployment time by automating the whole process. 
+How the process works?
+Developers make continuous changes to the DVC(Git). Code is pulled over every commit made in the source code. Every change made in the source code is build continuously. Every build will run through a series of unit tests prescribed by the GIT. Finally if all the test cases are successful, the tool deploys it on the Production Environment(Docker or the System). Finally e2e testing is completed and left for Operations to take over. 
+
+Jenkins is an automation tool created in Java with lots of pluggins for continuous integration tasks. It is used to build and test the projects making it easier to integrate the changing codes without a need to recheck again and again. It also allows us to continuously deliver our product using deployment tools.
+  
+Advantages of JENKINS?
+Open source and free of cost. 
+Easily installable and configurable. 
+Portable on multiple platforms as its built using java. 
+Supports even cloud based architecture. 
+
+Disadvantages:
+Its a server so it needs an Admin to maintain it.
+It does not have a neat user interface, most of the time, it works using CLI.
+It is created on distributed build pattern, so U will have a multiple version: Server version and the Node version(found in local machine). 
+
+Architecture:
+Will have 2 components: Jenkins Master and Jenkins Slave(Node).
+The main server of the Jenkins is called as the Master. It is a web dashboard running on port no 8080. With the dashboard, U could configure jobs/projects. Building of the project happens in Nodes. 
+Master does the important works like:
+Scheduling build jobs
+Monitor the nodes across multiple platforms. Node slaves can reside on multiple platforms like linux, windows, mac and even Android devices. 
+Record and report the build results. 
+
+The Jenkins slave is used to execute the build jobs dispatched by the master server. U could configure a project to run on a particular slave machine.
+The master ensures that the workload is distributed among all the slaves of the server. 
+
+Installation requirements:
+Any OS. Java 8.0 or later to work on Jenkins. 
+Once the Jenkins server is installed in the local machine, U should be able to download the pluggins required for Ur Automation. The source code of the testing would be obtained either from the local directory or from a DVS(like git or bitbukket). 
+Create a task or job into the server. give a name to it. Source code management should be set to UR respective folder or the GIT REPO. All the build process will now take the source code from the DVS URL mentioned in the link. 
+
+Creating Users.
+U could install the users using the settings provided by JENKINS
+
+  
+
+
+          
+
+
+
+
+
+ 
+ 
+ 
+

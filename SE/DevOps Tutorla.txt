@@ -1,0 +1,46 @@
+What is DevOps?
+Why DevOps?
+What is DevOps?
+DevOps Stages
+DevOp Tools
+DevOps Use Case
+
+Waterfall Model:
+Linear and sequential.
+Requirement
+Design
+Implement
+Test
+Deploy
+Maintenance
+Limitations:
+  High amounts of risk and uncertainty
+  No working software is produced until late during the life cycle
+  Once it reaches the testing phase, it is difficult to go back and change something that was not well thought out in the concept stage.
+  Not good for Complex and OO Projects
+  Not suited for projects where requirements are at moderate to high risk of changing.
+Agile methodology
+Each project is broken into several iterations. All iterations must be of the same time duration b/w 2 to 4 weeks. At the end of each iteration, a working  product should be delivered. 
+Discover->Design->Develop->Test->Deploy
+Limitations:
+Dev part is Agile
+Operations were not stable. 
+
+Solution is DevOps
+Development Team and Operations Team.
+Good quality software in time.
+Happens thro tools of the devOps. 
+Continuous development and deployment. 
+Version control:
+Maintaining different version of the code. to maintain the code we use git. 
+continuous integration: Pull the code and prepare the build: Compiling, validating, code review, UNit testing and integration testing. 
+Jenkins will do the job.
+Continuous deployment is done with Dockers. Continuous monitoring is done later.
+Source Code Management: 
+clear is used to clear the screen.     
+git init
+ 
+
+ 
+   
+  

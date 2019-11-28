@@ -1,0 +1,36 @@
+Docker in DevOps:
+Docker is a platform for packaging, deploying and running an Application. Docker Applications run in containers that can be used on any system: a Developer's laptop, systems in premises as well as in the Cloud. The feature of containing software inside containers is called Containerization. 
+
+Containerization is a technology that packages the applications as images that contain everything needed to execute them: code, runtime Environment, libraries and configurations. Images run in containers which are processes that manage the application that it contains by using resources on a need based for that executable. 
+
+Imp: Docker containers don't run on kind of virtual machines, instead share a Linux kernel. With this, it consumes less memory and CPU. Linux runtime is still required by the Docker. So other OS like Mac and Windows use a single Linux virtual machine on which the containers will reside and share the system. 
+
+Features and Advantages:
+Consistent test environment for development as well as operations.
+Ability to scale the application efficiently in real time. 
+Cross platform packages called as Images. 
+Isolation and encapsulation of app dependencies.
+U could reuse the same images for various apps. 
+
+Docker supports various kinds of images(Mostly open source) that can be installed into the environment and can consume. Dockers are now even having repositories like GIT so that U don't need to link Ur code files from an external tool.  
+
+How to work with Docker?
+U could install the Docker Software from the hub.docker.com website. U need to install Docker Desktop into the machine.   
+Once installed U can run any docker image. 
+Command to execute a image:docker run imageName
+Docker initially looks for the image that has been asked for. When it cant find the image, it downloads the image from the Docker hub. Finally when all the installation is completed, U will be ready to consume the Image. 
+docker ps -a: Provides the Lists of all the container that are available within the local machine.  
+
+With the latest version of docker, U could create repositories into UR docker and consume it as an image within UR local machine. It can be configured to other repository tools like Github and bitbucket. 
+
+
+
+
+
+
+
+
+
+
+
+
