@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="ds" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/user" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean id="obj1"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- wiring the dataSource into the SessionFActory -->
+		<property name="dataSource" ref="ds" />
+		<property name="annotatedClasses">
+			<list>
+ 			<value>day6_hibernate_customer.Customer</value> 
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+ 	<bean id="obj" class="day6_hibernate_customer.DAOCustomer">
+		<property name="sessionFactory" ref="obj1" />
+	</bean>
+	
+</beans>
