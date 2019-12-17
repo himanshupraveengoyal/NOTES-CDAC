@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+         http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.2.xsd ">
+        
+
+<!--  the execution of any public method: execution (public * *(..)) -->
+<!--  the execution of any method with a name beginning with "set": execution (* set*(..)) -->
+<!-- the execution of any method defined by the AccountService interface: execution(* com.xyz.service.AccountService.*(..))-->
+<!-- the execution of any method defined in the service package: execution(* com.xyz.service.*.*(..)) -->
+
+
+
+<bean id="obj1" class="day5_aop.A"/>
+<bean id="obj2" class="day5_aop.B"/>
+<aop:config>
+	
+	<aop:aspect ref="obj2">
+     
+	<aop:pointcut id="xyz" expression="execution(* freak*())"/>
+	<aop:before pointcut-ref="xyz" method="f1"/>
+	<aop:after pointcut-ref="xyz" method="f2"/>
+     
+     </aop:aspect>
+     
+</aop:config>
+
+         
+</beans>
